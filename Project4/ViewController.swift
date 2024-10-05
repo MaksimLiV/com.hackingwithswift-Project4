@@ -78,24 +78,21 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        let url = navigationAction.request.url
-        
-        if let host = url?.host {
-            let cleanedHost = host.replacingOccurrences(of: "www.", with: "")
-            
-            for website in websites {
-                if cleanedHost.contains(website) {
-                    decisionHandler(.allow)
-                    return
-                }
-            }
+        guard let url = navigationAction.request.url, let host = url.host else {
+            decisionHandler(.cancel)
+            return
         }
+
+        let cleanedHost = host.replacingOccurrences(of: "www.", with: "")
         
-        let ac = UIAlertController(title: "Blocked", message: "This website is blocked.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
-        
-        decisionHandler(.cancel)
+        if websites.contains(where: { cleanedHost.contains($0) }) {
+            decisionHandler(.allow)
+        } else {
+            let ac = UIAlertController(title: "Blocked", message: "This website is blocked.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+            decisionHandler(.cancel)
+        }
     }
     
 }
