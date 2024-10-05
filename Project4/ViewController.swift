@@ -11,7 +11,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         webView.navigationDelegate = self
         view = webView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +34,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         navigationController?.setToolbarHidden(false, animated: true)
         
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
-      
+        
         let url = URL(string: "https://" + websites[0])!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
@@ -42,7 +42,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     @objc func openTapped() {
         let ac = UIAlertController(title: "Open page...", message: nil, preferredStyle: .actionSheet)
-    
+        
         for website in websites {
             ac.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
         }
@@ -50,8 +50,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         if let popover = ac.popoverPresentationController {
-                   popover.barButtonItem = navigationItem.rightBarButtonItem
-               }
+            popover.barButtonItem = navigationItem.rightBarButtonItem
+        }
         
         present(ac, animated: true)
     }
@@ -67,22 +67,24 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-            if keyPath == "estimatedProgress" {
-                progressView.progress = Float(webView.estimatedProgress)
-            }
+        if keyPath == "estimatedProgress" {
+            progressView.progress = Float(webView.estimatedProgress)
         }
+    }
+    
+    deinit {
         
-        deinit {
-            
-            webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
-        }
+        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
+    }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         let url = navigationAction.request.url
         
         if let host = url?.host {
+            let cleanedHost = host.replacingOccurrences(of: "www.", with: "")
+            
             for website in websites {
-                if host.contains(website) {
+                if cleanedHost.contains(website) {
                     decisionHandler(.allow)
                     return
                 }
@@ -94,7 +96,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
         present(ac, animated: true)
         
         decisionHandler(.cancel)
-        
     }
     
 }
