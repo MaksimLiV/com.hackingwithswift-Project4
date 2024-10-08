@@ -22,12 +22,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-353" y="-9"/>
+            <point key="canvasLocation" x="915" y="-9"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="3Ld-kK-DQr">
             <objects>
-                <tableViewController id="Xbb-X1-nJ4" sceneMemberID="viewController">
+                <tableViewController id="Xbb-X1-nJ4" customClass="TableViewController" customModule="Project4" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="bOg-n1-Y2b">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,6 +40,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="showWebsite" trigger="accessoryAction" id="MTX-Ox-h8v"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -51,7 +54,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vNN-Po-DFo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1148" y="-9"/>
+            <point key="canvasLocation" x="-76" y="-9"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="H92-Yt-ZTr">
@@ -69,7 +72,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJ9-vJ-jma" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="599" y="-1"/>
+            <point key="canvasLocation" x="-1095" y="-9"/>
         </scene>
     </scenes>
     <resources>

@@ -9,7 +9,7 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
-    var websites = ["hackingwithswift.com", "facebook.com", "apple.com"]
+    var websites = ["apple.com", "facebook.com", "hackingwithswift.com"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +30,9 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedWebsite = websites[indexPath.row]
         
-        // Инициализируем ViewController с WebView и передаем выбранный сайт
         let webVC = ViewController()
         webVC.selectedWebsite = selectedWebsite
         navigationController?.pushViewController(webVC, animated: true)
     }
+    
 }
